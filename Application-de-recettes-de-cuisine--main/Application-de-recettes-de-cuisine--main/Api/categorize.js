@@ -56,6 +56,33 @@ async function getCategoryOpt() {
 }
 getCategoryOpt();
 
+
+/////////////////////////////lamb and moroccan
+
+async function getLambAndMr() {
+  const responceArea = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?a=Moroccan`
+  );
+  const dataArea = await responceArea.json();
+  const array = [];
+
+  const responce = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb`
+  );
+  const data = await responce.json();
+
+  for (let i = 0; i < dataArea.meals.length; i++) {
+    array.push(dataArea.meals[i].idMeal);
+  }
+
+  root.innerHTML = "";
+  for (let i = 0; i < data.meals.length; i++) {
+    if (array.includes(data.meals[i].idMeal)) {
+      Content(data.meals[i]);
+    }
+  }
+  }
+  getLambAndMr()
 ///////////////////////////// search by category and area
 
 async function getElements() {
